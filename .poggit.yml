@@ -5,6 +5,7 @@ branches:
 projects:
   SkyblockGB:
     path: ""
+    icon: "icon.png"
     lint: false
     libs:
       - src: muqsit/invmenu/InvMenu
