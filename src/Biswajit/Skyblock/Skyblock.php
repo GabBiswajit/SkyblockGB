@@ -51,7 +51,8 @@ class Skyblock extends PluginBase
   public function onEnable(): void 
   {
     self::$instance = $this;
-    $this->pet = [];
+    $this->createplayerFolder();
+    $this->saveResource("world.zip");
     $this->getServer()->getPluginManager()->registerEvents(new EventHandler($this), $this);
     if(!InvMenuHandler::isRegistered())
     {
@@ -61,9 +62,7 @@ class Skyblock extends PluginBase
     $FormAPI = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
     if($FormAPI === null)
     {
-  	$this->saveResource("world.zip");
     $this->getServer()->getLogger()->warning("FormAPI not found");
-    $this->createplayerFolder();
      }      
   }
   
