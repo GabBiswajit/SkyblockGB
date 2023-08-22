@@ -7,7 +7,7 @@ projects:
     path: ""
     lint: false
     libs:
-      - src: muqsit\invmenu\InvMenu
+      - src: muqsit/invmenu/InvMenu
         version: ^4.6.5
       - src: jojoe77777/FormAPI/libFormAPI
         version: ^2.1.1
