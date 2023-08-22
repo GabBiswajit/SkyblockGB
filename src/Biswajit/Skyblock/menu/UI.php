@@ -118,6 +118,9 @@ class UI
             $this->Lock($player);
             break;
           case 3:
+            $this->api->teleportToIsland($player);
+            break;
+          case 4:
                $playerName = $player->getName();
                $playerFile = $this->api->getSource()->getPlayerFile($playerName);
                $this->api->getSource()->getServer()->getWorldManager()->loadWorld($playerFile->get("Island"));
@@ -134,6 +137,7 @@ class UI
     $Form->addButton("§eIsland Settings", 1, "https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/256/Settings-icon.png");
     $Form->addButton("§eVisit Island", 0, "textures/items/ender_pearl");
     $Form->addButton("§eVisit Settings", 1, "https://www.clipartmax.com/png/full/162-1624622_brenz-block-is-a-skyblock-minecraft-logo.png");
+    $Form->addButton("§eTp To Island", 1, "https://www.clipartmax.com/png/full/162-1624622_brenz-block-is-a-skyblock-minecraft-logo.png");
     $Form->addButton("§eReset Island", 1, "https://www.clipartmax.com/png/full/162-1624622_brenz-block-is-a-skyblock-minecraft-logo.png");
     $Form->sendToPlayer($player);
   }
