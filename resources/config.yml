@@ -1,0 +1,6 @@
+---
+Join:
+  CreateIsland: true
+  TeleportToIsland: true
+IslandWorld: "world.zip"
+---
