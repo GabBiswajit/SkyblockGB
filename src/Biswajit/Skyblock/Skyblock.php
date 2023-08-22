@@ -135,7 +135,7 @@ class Skyblock extends PluginBase
       case "join":
         if($player instanceof Player)
         {
-          $this->getAPI()->teleportToIsland($player);
+          $this->getAPI()->teleportToIsland($player, 10);
         }
         break;
       return true;
