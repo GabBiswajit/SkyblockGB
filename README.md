@@ -1,5 +1,5 @@
-
-    ` A Ultimate SkyBlocks plugin for PocketMine-MP, with many features to offer`.
+## Skyblock GB
+    A Ultimate SkyBlocks plugin for PocketMine-MP, with many features to offer.
 
  # Features 
 
