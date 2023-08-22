@@ -1,0 +1,14 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/GabBiswajit/SkyblockGB
+build-by-default: true
+branches:
+- main
+projects:
+  SkyblockGB:
+    path: ""
+    lint: false
+    libs:
+      - src: muqsit\invmenu\InvMenu
+        version: ^4.6.5
+      - src: jojoe77777/FormAPI/libFormAPI
+        version: ^2.1.1
+...
