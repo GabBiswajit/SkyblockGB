@@ -1,5 +1,5 @@
 <p align="center">
-    <b>A Ultimate SkyBlocks plugin for PocketMine-MP, with many features to offer.</b>
+    <b>A`Ultimate SkyBlocks plugin for PocketMine-MP, with many features to offer`.</b>
 
  # Features 
 
