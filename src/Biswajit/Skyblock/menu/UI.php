@@ -118,7 +118,7 @@ class UI
             $this->Lock($player);
             break;
           case 3:
-            $this->api->teleportToIsland($player);
+            $this->api->teleportToIsland($player, 10);
             break;
           case 4:
                $playerName = $player->getName();
