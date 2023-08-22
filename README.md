@@ -1,6 +1,6 @@
 ## Skyblock GB
 
- `A Ultimate SkyBlocks plugin for PocketMine-MP, with many features to offer.`
+ A Ultimate SkyBlocks plugin for PocketMine-MP, with many features to offer.
 
  # Features 
 
