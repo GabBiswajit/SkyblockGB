@@ -184,35 +184,6 @@ class EventHandler implements Listener
     }
    
   }
- 
-  public function onMove(PlayerMoveEvent $event)
-  {
-    $player = $event->getPlayer();
-    $playerName = $player->getName();
-    $playerX = (int) floor($player->getLocation()->x);
-    $playerY = (int) floor($player->getLocation()->y);
-    $playerZ = (int) floor($player->getLocation()->z);
-    $playerWorld = $player->getLocation()->world;
-    $worldName = $playerWorld->getFolderName();
-    $PlayerInfo = API::getInstance()->getPlayerInfo($worldName);
-    $HasSkyblock = $PlayerInfo->hasSkyblock();
-    if($HasSkyblock)
-    {
-      $portalPos1 = $this->getSource()->getPlayerFile($worldName)->getNested("IslandSettings.Portal.Position-1");
-      $portalPos2 = $this->getSource()->getPlayerFile($worldName)->getNested("IslandSettings.Portal.Position-2");
-      $portalX = $portalPos1[0];
-      $portalY = $portalPos1[1];
-      $portalZ = $portalPos1[2];
-      $portalX2 = $portalPos2[0];
-      $portalY2 = $portalPos2[1];
-      $portalZ2 = $portalPos2[2];
-      if(($playerX >= $portalX && $playerX <= $portalX2) && ($playerY >= $portalY && $playerY <= $portalY2) && ($playerZ >= $portalZ && $playerZ <= $portalZ2))
-      {
-        $defaultWorld = Server::getInstance()->getWorldManager()->getDefaultWorld();
-        $player->teleport($defaultWorld->getSafeSpawn());
-      }
-    }
-  }
   /**
    * @return Skyblock
    */
