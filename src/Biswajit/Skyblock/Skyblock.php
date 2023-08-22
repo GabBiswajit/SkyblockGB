@@ -132,7 +132,7 @@ class Skyblock extends PluginBase
           $this->getUI()->MainUI($player);
         }
         break;
-      case "sb tp":
+      case "join":
         if($player instanceof Player)
         {
           $this->getAPI()->teleportToIsland($player);
