@@ -8,8 +8,14 @@ commands:
   skyblock:
     description: "Skyblock Command"
     permission: "SkyblockGB.skyblock.cmd"
+  join:
+    description: "Join Command"
+    permission: "SkyblockGB.join.cmd"
     
 permissions:
   SkyblockGB.skyblock.cmd:
     description: "SkyIsland Permission"
+    default: true
+  SkyblockGB.join.cmd:
+    description: "Join Permission"
     default: true
