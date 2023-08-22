@@ -1,0 +1,15 @@
+name: SkyblockGB
+author: Biswajit
+api: 5.0.0
+version: 1.0.0
+main: Biswajit\Skyblock\Skyblock
+
+commands:
+  skyblock:
+    description: "Skyblock Command"
+    permission: "SkyblockGB.skyblock.cmd"
+    
+permissions:
+  SkyblockGB.skyblock.cmd:
+    description: "SkyIsland Permission"
+    default: true
