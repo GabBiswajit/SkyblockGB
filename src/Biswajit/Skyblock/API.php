@@ -124,8 +124,6 @@ class API
       $playerFile->setNested("IslandSettings.FriendsVisit", false);
       $playerFile->setNested("IslandSettings.MaxVisitors", 5);
       $playerFile->setNested("IslandSettings.CanDropItems", true);
-      $playerFile->setNested("IslandSettings.Portal.Position-1", $this->getSource()->getConfigFile()->getNested("Portal.Position-1"));
-      $playerFile->setNested("IslandSettings.Portal.Position-2", $this->getSource()->getConfigFile()->getNested("Portal.Position-2"));
       $playerFile->save();
     }
   }
