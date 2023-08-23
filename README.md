@@ -27,3 +27,8 @@
 ## Suggestions
 
 - contact me in the [Discord Server](https://discord.gg/vZCAnCTrHU) and suggest the suggestion you have in mind for this plugin!
+
+## Images
+![IMG_20230823_140640](https://github.com/GabBiswajit/SkyblockGB/assets/121815367/397b2295-0241-44f2-9f7d-7843ba370ba4)
+![IMG_20230823_140623](https://github.com/GabBiswajit/SkyblockGB/assets/121815367/139570f4-5ded-4410-8886-581780029b9d)
+![IMG_20230823_140602](https://github.com/GabBiswajit/SkyblockGB/assets/121815367/4d689d35-f350-453f-a8fd-f98b8e51122b)
