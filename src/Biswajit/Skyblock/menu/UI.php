@@ -118,14 +118,9 @@ class UI
             break;
           case 3:
             if($this->api->getCoOpRole($player) === "Owner" || $this->api->getCoOpRole($player) === "Co-Owner")
-          {
-            $player->removeCurrentWindow();
-            $this->api->getSource()->getScheduler()->scheduleDelayedTask(new ClosureTask(function() use($player, $inv): void
-              {
+           {
                 $this->addMemberMenu($player);
-              }
-            ), 11);
-          }
+                  }
             break;
           case 4:
                $this->delis($player);
