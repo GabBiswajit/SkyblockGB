@@ -55,7 +55,7 @@ class UI
           $player->sendMessage("§cPlease enter a name tag");
           return true;
         }
-        $result = (string) $data[1];
+        $result = $data[0] ?? "";
         $victim = Server::getInstance()->getPlayerByPrefix($result);
         if($victim instanceof Player)
         {
