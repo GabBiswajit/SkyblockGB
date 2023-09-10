@@ -221,12 +221,12 @@ class GUI
         {
           $slot = $i + 10;
           $playerName = $online->getName();
-          $inv->setItem($slot, VanillaBlocks::MOB_HEAD()->setCustomName("§r §b$playerName §r"));
+          $inv->setItem($slot, VanillaBlocks::MOB_HEAD()->asItem()->setCustomName("§r §b$playerName §r"));
         }elseif($i < 14)
         {
           $slot = $i + 12;
           $playerName = $online->getName();
-          $inv->setItem($slot, VanillaBlocks::MOB_HEAD()->setCustomName("§r §b$playerName §r"));
+          $inv->setItem($slot, VanillaBlocks::MOB_HEAD()->asItem()->setCustomName("§r §b$playerName §r"));
         }elseif($i < 21)
         {
           $slot = $i + 14;
