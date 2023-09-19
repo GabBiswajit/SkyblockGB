@@ -1,11 +1,10 @@
 name: SkyblockGB
 author: Biswajit
 api: 5.0.0
-version: 1.0.0
+version: 1.0.1
 main: Biswajit\Skyblock\Skyblock
 depend:
 - MultiWorld
-
 
 commands:
   skyblock:
