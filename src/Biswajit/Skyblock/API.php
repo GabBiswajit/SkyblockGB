@@ -685,6 +685,28 @@ class API
       return true;
     }
   }
+
+  public function IsUnbreakable($x, $y, $z, $worldName): bool
+  {
+    $found = false;
+    foreach($this->getUnbreakables() as $unbreakable)
+    {
+      if(is_file($this->getSource()->getDataFolder() . "unbreakables/$unbreakable"))
+      {
+        $file = new Config($this->getSource()->getDataFolder() . "unbreakables/$unbreakable", Config::YAML, [
+          ]);
+        $key = $file->get("Unbreakable");
+        $a_Unbreakable = "{$key[0]}:{$key[1]}:{$key[2]}:{$key[3]}";
+        $b_Unbreakable = "{$x}:{$y}:{$z}:{$worldName}";
+        if($a_Unbreakable === $b_Unbreakable)
+        {
+          $found = true;
+          break;
+        }
+      }
+    }
+    return $found;
+  }
   
   public function getCoOpRequests($player)
   {
