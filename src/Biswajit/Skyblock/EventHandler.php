@@ -154,7 +154,31 @@ class EventHandler implements Listener
       $event->uncancel();
     }
   }
-  
+ 
+  public function onInteract(PlayerInteractEvent $event)
+  {
+    $player = $event->getPlayer();
+    if($player->getWorld()->getFolderName() === $this->getSource()->getPlayerFile($playerName)->get("Island"))
+    {
+      $role = $this->api->getCoOpRole($player);
+      if($this->api->getCoOpRole($player) === "Owner" || $this->api->getCoOpRole($player) === "Co-Owner" || $this->api->hasCoOpPerm($player, "Interact"))
+      {
+        $x = $block->getPosition()->getX();
+        $y = $block->getPosition()->getY();
+        $z = $block->getPosition()->getZ();
+        $world = $block->getPosition()->getWorld()->getFolderName();
+        if($this->api->IsUnbreakable($x, $y, $z, $world))
+        {
+          $event->cancel();
+        }else{
+          $event->uncancel();
+        }
+      }else{
+        $event->cancel();
+      }
+    }
+}
+ 
   public function onDropItem(PlayerDropItemEvent $event)
   {
     $item = $event->getItem();
