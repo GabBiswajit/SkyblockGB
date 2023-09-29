@@ -52,6 +52,7 @@ class Skyblock extends PluginBase
   {
     self::$instance = $this;
     $this->createplayerFolder();
+    $this->createunbreakablesFolder();
     $this->saveResource("world.zip");
     $this->getServer()->getPluginManager()->registerEvents(new EventHandler($this), $this);
     if(!InvMenuHandler::isRegistered())
@@ -109,6 +110,18 @@ class Skyblock extends PluginBase
       ]);
     return $playerFile;
   }
+
+  private function createunbreakablesFolder() {
+        $pluginDataFolder = $this->getDataFolder();
+        $playerFolder = $pluginDataFolder . "unbreakables/";
+
+        if (!is_dir($playerFolder)) {
+            mkdir($playerFolder, 0777, true);
+            $this->getLogger()->info("unbreakables folder created successfully!");
+        } 
+    }
+  
+
   private function createplayerFolder() {
         $pluginDataFolder = $this->getDataFolder();
         $playerFolder = $pluginDataFolder . "players/";
@@ -116,9 +129,7 @@ class Skyblock extends PluginBase
         if (!is_dir($playerFolder)) {
             mkdir($playerFolder, 0777, true);
             $this->getLogger()->info("Player folder created successfully!");
-        } else {
-            $this->getLogger()->info("Player folder already exists.");
-        }
+       }
   }
 
   public function onCommand(CommandSender $player, Command $cmd, string $label, array $args): bool 
