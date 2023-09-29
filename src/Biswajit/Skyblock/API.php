@@ -894,6 +894,16 @@ class API
     rmdir($dirPath);
     }
   }
+
+  public function getUnbreakables(): array
+  {
+    $array = [];
+    foreach(scandir($this->getSource()->getDataFolder() . "unbreakables") as $key => $file)
+    {
+      $array[] = $file;
+    }
+    return $array;
+  }
   
   
   public function randomString(int $length = 40, $path = "", string $extension = "yml")
