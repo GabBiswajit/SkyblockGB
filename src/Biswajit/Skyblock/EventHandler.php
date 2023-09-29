@@ -158,7 +158,8 @@ class EventHandler implements Listener
   public function onInteract(PlayerInteractEvent $event)
   {
     $player = $event->getPlayer();
-    $playerName = $player;
+    $playerName = $player->getName();
+    $block = $event->getBlock();
     if($player->getWorld()->getFolderName() === $this->getSource()->getPlayerFile($playerName)->get("Island"))
     {
       $role = $this->api->getCoOpRole($player);
