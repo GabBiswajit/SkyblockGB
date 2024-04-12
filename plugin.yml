@@ -1,7 +1,7 @@
 name: SkyblockGB
 author: Biswajit
 api: 5.0.0
-version: 1.0.1
+version: 1.1.0
 main: Biswajit\Skyblock\Skyblock
 depend:
 - MultiWorld
@@ -13,9 +13,14 @@ commands:
   join:
     description: "Join Command"
     permission: "SkyblockGB.join.cmd"
-    
+  coop:
+    description: "Co-Op Command"
+    permission: "SkyblockGB.coop.cmd"
 permissions:
   SkyblockGB.skyblock.cmd:
+    description: "SkyIsland Permission"
+    default: true
+  SkyblockGB.coop.cmd:
     description: "SkyIsland Permission"
     default: true
   SkyblockGB.join.cmd:
