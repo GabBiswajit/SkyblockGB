@@ -137,9 +137,83 @@ class Skyblock extends PluginBase
           $this->getAPI()->teleportToIsland($player, 10);
         }
         break;
+     case "coop":
+        if($player instanceof Player)
+        {
+          if(count($args) === 2)
+          {
+            switch($args[0])
+            {
+              case "add":
+                $victimName = $args[1];
+                $playerName = $player->getName();
+                $victim = $player->getServer()->getPlayerByPrefix($victimName);
+                if($victim instanceof Player)
+                {
+                  if($this->getAPI()->getCoOpRole($victim) === "Owner" || $this->getAPI()->getCoOpRole($victim) === "Co-Owner")
+                  {
+                    $members = count($this->api->getMembers($player));
+                    $maxMembers = $this->api->getMaxMembers($player);
+                    if($members < $maxMembers)
+                    {
+                      if($this->getAPI()->addCoOpRequest($victim, $playerName))
+                      {
+                        $player->sendMessage("§ainvite sent to §e".$victim->getName());
+                        $player->sendMessage("§athis invite will expire in 1 minute");
+                        $victim->sendMessage("§ayou recieved a coop request from §e$playerName");
+                        $victim->sendMessage("§atype: §e/coop accept $playerName");
+                      }else{
+                        $player->sendMessage("§can error occured");
+                      }
+                    }else{
+                      $player->sendMessage("§can error occured");
+                    }
+                  }else{
+                    $player->sendMessage("§can error occured");
+                  }
+                }else{
+                  $player->sendMessage("§can error occurred");
+                }
+                break;
+              case "accept":
+                $victimName = $args[1];
+                $playerName = $player->getName();
+                $victim = Server::getInstance()->getPlayerByPrefix($victimName);
+                if($this->getAPI()->addCoOp($player, $victimName))
+                {
+                  $player->sendMessage("§aaccepted §e$victimName's §aCoOp request");
+                  if($victim instanceof Player)
+                  {
+                    $victim->sendMessage("§e$playerName §aaccepted your CoOp request");
+                  }
+                }else{
+                  $player->sendMessage("§can error occurred");
+                }
+                break;
+              case "deny":
+                $victimName = $args[1];
+                $playerName = $player->getName();
+                $victim = Server::getInstance()->getPlayerByPrefix($victimName);
+                  if($this->getAPI()->removeCoOpRequest($playerName, $victimName))
+                  {
+                    $player->sendMessage("§adenied §e$victimName's CoOp request");
+                    if($victim instanceof Player)
+                    {
+                      $victim->sendMessage("§e$playerName §adenied your CoOp request");
+                    }
+                  }else{
+                    $player->sendMessage("§can error occurred");
+                  }
+                break;
+              default:
+                $player->sendMessage("§ausage: §e/coop [add|accept|remove|deny] <player_name>");
+                break;
+            }
+          }
+        }
+        break;
       return true;
     }
     return false;
   }
-  
 }
