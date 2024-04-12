@@ -14,13 +14,10 @@ namespace Biswajit\Skyblock;
 use pocketmine\Server;
 use pocketmine\player\Player;
 
-use rank\Ranks;
 use Biswajit\Skyblock\API;
 use Biswajit\Skyblock\Skyblock;
-use pocketmine\entity\Entity;
 use pocketmine\event\Listener;
 use pocketmine\item\ItemBlock;
-use Biswajit\Skyblock\api\VariablesAPI;
 use pocketmine\item\VanillaItems;
 
 use pocketmine\block\Block;
@@ -37,13 +34,6 @@ use pocketmine\entity\Location;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\scheduler\ClosureTask;
 
-use pocketmine\inventory\ArmorInventory;
-
-use pocketmine\network\mcpe\protocol\LoginPacket;
-use pocketmine\network\mcpe\protocol\ProtocolInfo;
-use pocketmine\network\mcpe\protocol\InteractPacket;
-use pocketmine\network\mcpe\protocol\setActorLinkPacket;
-use pocketmine\network\mcpe\protocol\types\entity\EntityLink;
 
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -72,10 +62,6 @@ use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityTrampleFarmlandEvent;
 use pocketmine\event\inventory\InventoryTransactionEvent;
-use pocketmine\item\enchantment\StringToEnchantmentParser;
-use pocketmine\inventory\transaction\action\DropItemAction;
-use pocketmine\network\mcpe\protocol\MoveActorAbsolutePacket;
-use pocketmine\inventory\transaction\action\SlotChangeAction;
 
 class EventHandler implements Listener
 {
@@ -127,13 +113,13 @@ class EventHandler implements Listener
       $this->api->teleportToIsland($player, 20);
     }
   }
+ 
   public function onPickupItem(EntityItemPickupEvent $event)
   {
     $player = $event->getEntity();
     $playerName = $player->getName();
-    if($player->getLocation()->world->getFolderName() !== $this->getSource()->getPlayerFile($playerName)->get("Island") && $player->getLocation()->world->getFolderName() !== Server::getInstance()->getWorldManager()->getDefaultWorld()->getFolderName())
-    {
-      $worldName = $player->getLocation()->world->getFolderName();
+    if($player->getWorld()->getFolderName() !== $this->getSource()->getPlayerFile($playerName)->get("Island")) {
+      $worldName = $player->getWorld()->getFolderName();
       if($this->api->hasSkyblock($worldName) && $worldName !== Server::getInstance()->getWorldManager()->getDefaultWorld()->getFolderName())
       {
         if($worldName !== $this->getSource()->getPlayerFile($worldName)->get("Island"))
@@ -151,7 +137,7 @@ class EventHandler implements Listener
         $event->uncancel();
       }
     }else{
-      $event->uncancel();
+        $event->uncancel();
     }
   }
  
@@ -165,22 +151,47 @@ class EventHandler implements Listener
       $role = $this->api->getCoOpRole($player);
       if($this->api->getCoOpRole($player) === "Owner" || $this->api->getCoOpRole($player) === "Co-Owner" || $this->api->hasCoOpPerm($player, "Interact"))
       {
-        $x = $block->getPosition()->getX();
-        $y = $block->getPosition()->getY();
-        $z = $block->getPosition()->getZ();
-        $world = $block->getPosition()->getWorld()->getFolderName();
-        if($this->api->IsUnbreakable($x, $y, $z, $world))
-        {
-          $event->cancel();
-        }else{
-          $event->uncancel();
-        }
+        $event->uncancel();
       }else{
         $event->cancel();
       }
     }
-}
+  }
  
+  public function onBreak(BlockBreakEvent $event)
+  {
+    
+    $block = $event->getBlock();
+    $player = $event->getPlayer();
+    $playerName = $player->getName();
+    if($player->getWorld()->getFolderName() === $this->getSource()->getPlayerFile($playerName)->get("Island"))
+    {
+      if($this->api->getCoOpRole($player) === "Owner" || $this->api->getCoOpRole($player) === "Co-Owner" || $this->api->hasCoOpPerm($player, "Interact"))
+      {
+        $event->uncancel();
+      }else{
+        $event->cancel();
+        }
+      }
+    }
+  
+  public function onPlace(BlockPlaceEvent $event)
+  {
+    $block = $event->getBlock();
+    $player = $event->getPlayer();
+    $playerName = $player->getName();
+    
+    if($player->getWorld()->getFolderName() === $this->getSource()->getPlayerFile($playerName)->get("Island"))
+    {
+      if($this->api->getCoOpRole($player) === "Owner" || $this->api->getCoOpRole($player) === "Co-Owner" || $this->api->hasCoOpPerm($player, "Build"))
+      {
+        $event->uncancel();
+      }else{
+        $event->cancel();
+      }
+    }
+  }
+    
   public function onDropItem(PlayerDropItemEvent $event)
   {
     $item = $event->getItem();
@@ -188,7 +199,7 @@ class EventHandler implements Listener
     $playerName = $player->getName();
     if($player->getLocation()->world->getFolderName() !== $this->getSource()->getPlayerFile($playerName)->get("Island") && $player->getLocation()->world->getFolderName() !== Server::getInstance()->getWorldManager()->getDefaultWorld()->getFolderName())
     {
-      $worldName = $player->getLocation()->world->getFolderName();
+      $worldName = $player->getWorld()->getFolderName();
       if($this->api->hasSkyblock($worldName) && $worldName !== Server::getInstance()->getWorldManager()->getDefaultWorld()->getFolderName())
       {
         if($worldName !== $this->getSource()->getPlayerFile($worldName)->get("Island"))
@@ -208,8 +219,8 @@ class EventHandler implements Listener
     }else{
       $event->uncancel();
     }
-   
   }
+ 
   /**
    * @return Skyblock
    */
@@ -218,5 +229,4 @@ class EventHandler implements Listener
     $Skyblock = API::getSource();
     return $Skyblock;
   }
-  
 }
