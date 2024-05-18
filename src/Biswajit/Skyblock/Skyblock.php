@@ -51,7 +51,7 @@ class Skyblock extends PluginBase
   public function onEnable(): void 
   {
     self::$instance = $this;
-    $this->createplayerFolder();
+    @mkdir($this->getDataFolder() . "players");
     $this->createunbreakablesFolder();
     $this->saveResource("world.zip");
     $this->getServer()->getPluginManager()->registerEvents(new EventHandler($this), $this);
@@ -111,15 +111,7 @@ class Skyblock extends PluginBase
     return $playerFile;
   }
 
-  private function createplayerFolder() {
-        $pluginDataFolder = $this->getDataFolder();
-        $playerFolder = $pluginDataFolder . "players/";
-
-        if (!is_dir($playerFolder)) {
-            mkdir($playerFolder, 0777, true);
-            $this->getLogger()->info("Player folder created successfully!");
-       }
-  }
+  
 
   public function onCommand(CommandSender $player, Command $cmd, string $label, array $args): bool 
   {
