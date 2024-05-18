@@ -146,6 +146,9 @@ class EventHandler implements Listener
     $player = $event->getPlayer();
     $playerName = $player->getName();
     $block = $event->getBlock();
+    $onlinePlayers = Skyblock::getInstance()->getServer()->getOnlinePlayers();
+    foreach ($onlinePlayers as $online) {
+    $name = $online->getName();
     if($player->getWorld()->getFolderName() === $this->getSource()->getPlayerFile($playerName)->get("Island"))
     {
       $role = $this->api->getCoOpRole($player);
@@ -155,8 +158,11 @@ class EventHandler implements Listener
       }else{
         $event->cancel();
       }
-    }
+    }elseif($player->getWorld()->getFolderName() === $name) {
+     $event->cancel();
+   }
   }
+ }
  
   public function onBreak(BlockBreakEvent $event)
   {
@@ -164,6 +170,9 @@ class EventHandler implements Listener
     $block = $event->getBlock();
     $player = $event->getPlayer();
     $playerName = $player->getName();
+    $onlinePlayers = Skyblock::getInstance()->getServer()->getOnlinePlayers();
+    foreach ($onlinePlayers as $online) {
+    $name = $online->getName();
     if($player->getWorld()->getFolderName() === $this->getSource()->getPlayerFile($playerName)->get("Island"))
     {
       if($this->api->getCoOpRole($player) === "Owner" || $this->api->getCoOpRole($player) === "Co-Owner" || $this->api->hasCoOpPerm($player, "Interact"))
@@ -172,15 +181,20 @@ class EventHandler implements Listener
       }else{
         $event->cancel();
         }
-      }
+      }elseif($player->getWorld()->getFolderName() === $name) {
+     $event->cancel();
     }
-  
+   }
+  }
+ 
   public function onPlace(BlockPlaceEvent $event)
-  {
-    $block = $event->getBlock();
+ {
     $player = $event->getPlayer();
     $playerName = $player->getName();
-    
+    $onlinePlayers = Skyblock::getInstance()->getServer()->getOnlinePlayers();
+    foreach ($onlinePlayers as $online) {
+    $name = $online->getName();
+   
     if($player->getWorld()->getFolderName() === $this->getSource()->getPlayerFile($playerName)->get("Island"))
     {
       if($this->api->getCoOpRole($player) === "Owner" || $this->api->getCoOpRole($player) === "Co-Owner" || $this->api->hasCoOpPerm($player, "Build"))
@@ -189,15 +203,21 @@ class EventHandler implements Listener
       }else{
         $event->cancel();
       }
+    }elseif($player->getWorld()->getFolderName() === $name) {
+     $event->cancel();
+      }
     }
-  }
-    
+ }
+ 
   public function onDropItem(PlayerDropItemEvent $event)
   {
     $item = $event->getItem();
     $player = $event->getPlayer();
     $playerName = $player->getName();
-    if($player->getLocation()->world->getFolderName() !== $this->getSource()->getPlayerFile($playerName)->get("Island") && $player->getLocation()->world->getFolderName() !== Server::getInstance()->getWorldManager()->getDefaultWorld()->getFolderName())
+    $onlinePlayers = Skyblock::getInstance()->getServer()->getOnlinePlayers();
+    foreach ($onlinePlayers as $online) {
+    $name = $online->getName();
+    if($player->getLocation()->world->getFolderName() !== $this->getSource()->getPlayerFile($playerName)->get("Island") && $player->getWorld->getFolderName() === $name)
     {
       $worldName = $player->getWorld()->getFolderName();
       if($this->api->hasSkyblock($worldName) && $worldName !== Server::getInstance()->getWorldManager()->getDefaultWorld()->getFolderName())
@@ -216,8 +236,6 @@ class EventHandler implements Listener
       }else{
         $event->uncancel();
       }
-    }else{
-      $event->uncancel();
     }
   }
  
