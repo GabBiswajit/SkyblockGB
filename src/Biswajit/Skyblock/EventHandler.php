@@ -238,7 +238,7 @@ class EventHandler implements Listener
       }
     }
   }
- 
+}
   /**
    * @return Skyblock
    */
